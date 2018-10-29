@@ -1,0 +1,20 @@
+# Bytecode
+__pycache__
+*.py[cod]
+.pytest_cache
+
+# DS stores
+*.DS_Store
+.DS_Store
+
+# Builds
+dist
+build
+*.egg-info
+
+# Sublime projects
+*.sublime-project
+*.sublime-workspace
+
+# Virtual environment
+venv
