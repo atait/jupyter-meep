@@ -16,5 +16,8 @@ build
 *.sublime-project
 *.sublime-workspace
 
-# Virtual environment
-venv
+# Jupyter
+.ipynb_checkpoints
+
+# Data produced
+*.h5
