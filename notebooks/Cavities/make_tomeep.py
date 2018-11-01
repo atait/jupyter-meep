@@ -29,7 +29,7 @@ def to_meep(device, mapping):
 Device.to_meep = to_meep
 
 
-def give_geom():
+def give_geom(gap=.5):
     D = Device('test')
 
     cell = D << pg.rectangle([31, 15], layer=lys['FLOORPLAN'])
@@ -39,7 +39,7 @@ def give_geom():
     access.y = cell.y
     access.xmin = cell.xmin
 
-    loop = D << loop_mirror_terminator()
+    loop = D << loop_mirror_terminator(gap)
     loop.connect('wg_in_1', access.ports['E'])
 
     medium_map = dict()
