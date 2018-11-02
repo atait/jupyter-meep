@@ -16,7 +16,7 @@ def show_geometry(sim):
     sim.run(until=.0)
     eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
     plt.figure(dpi=100)
-    plt.imshow(eps_data.transpose(), interpolation='spline36', cmap='binary')
+    plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
     return eps_data
 
 
