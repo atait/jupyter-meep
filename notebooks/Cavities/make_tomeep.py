@@ -29,7 +29,7 @@ def to_meep(device, mapping):
 Device.to_meep = to_meep
 
 
-def give_geom(gap=.5):
+def give_loopmirror(gap=.5):
     D = Device('test')
 
     cell = D << pg.rectangle([31, 15], layer=lys['FLOORPLAN'])
