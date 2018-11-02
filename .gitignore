@@ -21,3 +21,6 @@ build
 
 # Data produced
 *.h5
+
+# Debug artifacts
+debugging.gds
