@@ -28,13 +28,13 @@ def liveplot(sim, component=mp.Ez):
     # component=mp.Ey
     if sim.meep_time() == 0.:
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
-        dielectric_artist = plt.imshow(eps_data.transpose(), interpolation='spline36', cmap='binary')
+        dielectric_artist = plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
     # now do the field
     field_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=component)
     global _field_artist
     if sim.meep_time() == 0.:
-        _field_artist = plt.imshow(field_data.transpose(), interpolation='spline36', cmap='RdBu',
-                                   alpha=0.9, vmin=-.1, vmax=.1)
+        _field_artist = plt.imshow(field_data.transpose()[::-1], interpolation='spline36', cmap='RdBu',
+                                   alpha=0.9, vmin=-.02, vmax=.02)
         return
     else:
         _field_artist.set_data(field_data.transpose())
