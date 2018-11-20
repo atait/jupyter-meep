@@ -26,3 +26,7 @@ I don't know why. Ask [this guy](https://darkalexwang.github.io/2016/10/06/pytho
 
 ### MPB
 Ok it seems there are actually bugs in the code where maxwell_eps.c is trying to get `NQUAD` from sphere-quad.h, but that h-file is empty. Strangely it is in the gitignore
+
+Alright! The autogen options also solved the problem with MPB.
+
+For python version, MPB goes within MEEP. You must reconfigure and re-install MEEP after installing MPB
