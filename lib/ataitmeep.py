@@ -20,13 +20,15 @@ def show_geometry(sim_or_solver):
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
     elif isinstance(sim_or_solver, mpb.ModeSolver):
         ms = sim_or_solver
-        md = mpb.MPBData(rectify=True, periods=5, resolution=32)
+        md = mpb.MPBData(rectify=True, periods=3, resolution=32)
         eps = ms.get_epsilon()
         eps_data = md.convert(eps)  # make aspect ratios right
     plt.figure(dpi=100)
     plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
     return eps_data
 
+def show_mode(solver):
+    pass
 
 
 _field_artist = None
