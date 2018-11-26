@@ -13,14 +13,16 @@ class objview(object):
         self.__dict__.update(kwargs)
 
 
-def show_geometry(sim_or_solver):
+def show_geometry(sim_or_solver, **mpb_kwargs):
     if isinstance(sim_or_solver, mp.Simulation):
         sim = sim_or_solver
         sim.run(until=.0)
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
     elif isinstance(sim_or_solver, mpb.ModeSolver):
         ms = sim_or_solver
-        md = mpb.MPBData(rectify=True, periods=3, resolution=32)
+        if not any(p in mpb_kwargs.keys() for p in ['periods', 'x', 'y', 'z']):
+            mpb_kwargs['periods'] = 3
+        md = mpb.MPBData(rectify=True, resolution=32, **mpb_kwargs)
         eps = ms.get_epsilon()
         eps_data = md.convert(eps)  # make aspect ratios right
     plt.figure(dpi=100)
