@@ -5,13 +5,15 @@ import time
 # geo is the parameters, while geometry is the MEEP geometry list
 default_geo = objview(
                         sm_width = 0.35,  # um
-                        pitch = .211,
+                        pitch = .21,
                         duty = .5,
-                        dw = .15,
+                        dw = .25,
                         n_periods = 50,
-                        buffer = 2,  # um
+                        buffer = 4,  # um
+                        cavity = 1.25,  # ratio of pitch, such as 0.25
                         thickness = 0.,  # change to 0 for 2D
                        )
+
 
 def set_sim1():
     # level 1 is very rough used for locating wavelength resonance
@@ -19,11 +21,13 @@ def set_sim1():
     default_geo.update(n_periods=10, buffer=2, dw=.3)
     resolution = 20
 
+
 def set_sim2():
     # level 2 is used for getting decent resonance shapes
     global default_geo, resolution
     default_geo.update(buffer=4)
     resolution = 30
+
 
 def set_sim3():
     # level 2 is used for getting loss profile
@@ -31,8 +35,10 @@ def set_sim3():
     default_geo.update(buffer=14)
     resolution = 40
 
-if True: # 3D
-    default_geo.update(pitch = .229, thickness=0.22)
+
+# 3D
+if False:
+    default_geo.update(pitch = .264, thickness=0.22)
 
 
 def kwargs_to_geo(geo=None, **kwargs):
@@ -43,8 +49,8 @@ def kwargs_to_geo(geo=None, **kwargs):
     return this_geo
 
 
-fcen = 1 / 1.3
-df = fcen / 3
+fcen = 1 / 1.22
+df = fcen / 5
 nfreq = 1001
 def bragg_source(geo=None, **kwargs):
     geo = kwargs_to_geo(geo, **kwargs)
@@ -86,7 +92,7 @@ def sim_kwargs(geo=None, **kwargs):
 
 def cell_x(geo=None, **kwargs):
     geo = kwargs_to_geo(geo, **kwargs)
-    return geo.pitch * geo.n_periods + 2 * geo.buffer
+    return geo.pitch * geo.n_periods + geo.cavity * geo.pitch + 2 * geo.buffer
 
 
 def bragg_cell(geo=None, **kwargs):
@@ -109,6 +115,13 @@ def bragg_geometry(geo=None, **kwargs):
     # the teeth of the grating
     x0 = geo.buffer - cellx/2
     for iPeriod in range(geo.n_periods):
+        if iPeriod == int(geo.n_periods / 2):
+            tooth_len = geo.cavity * geo.pitch
+            wg_wid = geo.sm_width + geo.dw / 2
+            geometry.append(mp.Block(mp.Vector3(tooth_len, wg_wid, geo.thickness),
+                                     center=mp.Vector3(x0 + tooth_len/2),
+                                     material=silicon))
+            x0 += tooth_len
         for iTooth in range(2):
             tooth_len = geo.pitch * (geo.duty if iTooth == 0 else (1 - geo.duty))
             wg_wid = geo.sm_width + geo.dw / 2 * (1 if iTooth == 0 else -1)
