@@ -1,18 +1,38 @@
 from ataitmeep import objview, silicon, oxide, liveplot
 import meep as mp
-
-is3D = False
+import time
 
 # geo is the parameters, while geometry is the MEEP geometry list
 default_geo = objview(
                         sm_width = 0.35,  # um
-                        pitch = .28,
+                        pitch = .211,
                         duty = .5,
-                        dw = .2,
-                        n_periods = 10,
-                        buffer = 5,  # um
+                        dw = .15,
+                        n_periods = 50,
+                        buffer = 2,  # um
                         thickness = 0.,  # change to 0 for 2D
                        )
+
+def set_sim1():
+    # level 1 is very rough used for locating wavelength resonance
+    global default_geo, resolution
+    default_geo.update(n_periods=10, buffer=2, dw=.3)
+    resolution = 20
+
+def set_sim2():
+    # level 2 is used for getting decent resonance shapes
+    global default_geo, resolution
+    default_geo.update(buffer=4)
+    resolution = 30
+
+def set_sim3():
+    # level 2 is used for getting loss profile
+    global default_geo, resolution
+    default_geo.update(buffer=14)
+    resolution = 40
+
+if True: # 3D
+    default_geo.update(pitch = .229, thickness=0.22)
 
 
 def kwargs_to_geo(geo=None, **kwargs):
@@ -23,22 +43,29 @@ def kwargs_to_geo(geo=None, **kwargs):
     return this_geo
 
 
-fcen = 1 / 1.22
-df = fcen / 5
-nfreq = 101
+fcen = 1 / 1.3
+df = fcen / 3
+nfreq = 1001
 def bragg_source(geo=None, **kwargs):
     geo = kwargs_to_geo(geo, **kwargs)
     # sources = []
-    sources = [mp.Source(mp.GaussianSource(fcen, fwidth=df),
-                     component=mp.Ey,
-                     center=mp.Vector3(-cell_x(geo) / 2 + dpml, 0),
-                     size=mp.Vector3(0, geo.sm_width, geo.thickness))]
+    # sources = [mp.Source(mp.GaussianSource(fcen, fwidth=df),
+    #                  component=mp.Ey,
+    #                  center=mp.Vector3(-monitor_x(geo)-.5, 0),
+    #                  size=mp.Vector3(0, geo.sm_width, geo.thickness))]
+    sources = [mp.EigenModeSource(mp.GaussianSource(fcen, fwidth=df),
+                                  eig_band=2,
+                                  direction=mp.X,
+                                  # eig_parity=mp.ODD_Y,
+                                  component=mp.Ey,
+                                  center=mp.Vector3(-monitor_x(geo)-.5, 0),
+                                  size=mp.Vector3(0, bragg_cell(geo).y, bragg_cell(geo).z))]
     return sources
 
 
 dpml = 1.
 pml_layers = [mp.PML(dpml)]
-resolution = 20
+resolution = 30
 # this should be replaced by an eigenmode
 def sim_kwargs(geo=None, **kwargs):
     geo = kwargs_to_geo(geo, **kwargs)
@@ -142,6 +169,8 @@ def do_simrun(base_refl_data=None, do_live=True, geo=None, **kwargs):
         sim.load_minus_flux_data(refl, base_refl_data)
 
     run_args = (mp.at_beginning(livefield), mp.at_every(5, livefield), ) if do_live else tuple()
+    t0 = time.time()
     sim.run(*run_args,
             **monitor_until(geo=geo, **kwargs))
+    print('Realtime duration = {:.2f} seconds'.format(time.time() - t0))
     return sim, refl, tran

@@ -6,10 +6,12 @@ import subprocess
 import shutil
 from IPython import display
 import meep as mp
-from meep import mpb
+from meep import mpb, materials
 
 silicon = mp.Medium(epsilon=12)
-oxide = mp.Medium(epsilon=3.9)
+oxide = mp.Medium(epsilon=2.25)
+# silicon = materials.cSi
+# oxide = materials.SiO2
 
 
 class objview(object):
@@ -68,7 +70,7 @@ def liveplot(sim, component=mp.Ez):
     global _field_artist
     if sim.meep_time() == 0.:
         _field_artist = plt.imshow(field_data.transpose()[::-1], interpolation='spline36', cmap='RdBu',
-                                   alpha=0.9, vmin=-.02, vmax=.02)
+                                   alpha=0.9, vmin=-.1, vmax=.1)
         return
     else:
         _field_artist.set_data(field_data.transpose())
