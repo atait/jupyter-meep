@@ -1,4 +1,6 @@
-from ataitmeep import objview, silicon, oxide, liveplot
+import sys, os
+sys.path.append(os.path.join(os.dirname(__file__), '../../lib'))
+from meep_nb import objview, silicon, oxide, liveplot
 import meep as mp
 import time
 
