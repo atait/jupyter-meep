@@ -5,16 +5,17 @@ from phidl import geometry as pg, Device
 import meep as mp
 
 silicon = mp.Medium(epsilon=12)
-cell_material = dict()
-port_source = dict()
+cell_material = dict()  # for floorplanning
+port_source = dict()  # for metadata layers
 
 
 def get_layer_mapping(layerset):
+    # Gets the silicon layer and the floorplan layer for the cell
     medium_map = dict()
     medium_map[layerset['wg_deep'].gds_layer] = silicon
     medium_map[layerset['FLOORPLAN'].gds_layer] = cell_material
-    # medium_map[1] = port_source
-    # medium_map[2] = port_source
+    medium_map[1] = port_source
+    medium_map[2] = port_source
     return medium_map
 
 
@@ -30,8 +31,9 @@ def device_to_meep(device, mapping):
             print('layer {} not in meep mapping'.format(layer))
             continue
         if material is cell_material:
-            # import pdb; pdb.set_trace()
             cell = mp.Vector3(poly_grp.xsize, poly_grp.ysize)
+            continue
+        elif material is port_source:
             continue
         for poly in poly_grp.polygons:
             vertex_list = list()

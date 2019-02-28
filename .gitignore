@@ -21,6 +21,7 @@ build
 
 # Data produced
 *.h5
+outputs/*.png
 
 # Debug artifacts
 debugging.gds

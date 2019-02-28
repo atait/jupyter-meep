@@ -1,12 +1,22 @@
 # atait, some things to make MEEP nicer
 Mostly, this is about using MEEP in jupyter notebooks.
 
-## Liveplot in notebooks
-This is important because you get real time feedback on how the simulation is going. Lumerical can't do that.
+## Features
+### Liveplot in notebooks
+This is important because you get real time feedback on how the simulation is going. Lumerical can't do that. To use it, wrap `liveplot` with a function that defines the field polarization. For example,
+```
+def livefield(sim):
+    liveplot(sim, mp.Ez)
+```
+Then in your simulator, do that plot every few timesteps
+```
+sim.run(
+        mp.at_beginning(livefield),
+        mp.at_every(5, livefield),
+        )
+```
 
-## Importing PHIDL Devices and gds files
-
-## Converting simulations to gifs
+### Converting simulations to gifs
 `to_gif`. You must have imagemagik installed. Usage:
 ```
 shutil.rmtree('outputs', ignore_errors=True)
@@ -18,6 +28,32 @@ sim.run(
         mp.to_appended('ez', mp.at_every(0.6, mp.output_efield_z)),    # Need this line to export the pngs
         until=until)
 to_gif('outputs', 'ez')
+```
+
+### Importing PHIDL Devices and gds files
+`device_to_meep` and `gds_to_meep`. You must have phidl installed.
+
+#### Example: loop mirror
+This is in a notebook. You must have nc_library available, so you have to ask Adam for access to nc-phidl. Then, add nc-phidl to your PYTHONPATH.
+
+### Save and load formulas
+This is done with `lightlab`. You sometimes don't want to resimulate the whole thing if you just want to mess with the plots. If the jupyter kernel reboots, then you will lose all of your simulation data needed to come back to the plot.
+
+The formula in the notebook goes like
+```
+isResimulating = True
+isSaving = True
+filename = 'shovel-length.pkl'
+if isResimulating:
+    spectra = do_thing(param_vals)  # do some kind of simulation involving parameter sweeps or something.
+    if isSaving:
+        io.savePickleGzip(dataTuple=(param_vals, spectra), filename=filename)
+else:
+    param_vals, spectra = io.loadPickleGzip(filename=filename)
+```
+And then in your new cell,
+```
+spectra.simplePlot()
 ```
 
 ## Notes on installing MEEP and MPB
