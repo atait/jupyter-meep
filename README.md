@@ -56,7 +56,7 @@ And then in your new cell,
 spectra.simplePlot()
 ```
 
-## Notes on installing MEEP and MPB
+## Notes on installing MEEP and MPB on OSX
 The ones [here](http://localhost:8000/Installation/) are not complete for Mac OSX. Some of the brew targets have been renamed
 
 ```bash
