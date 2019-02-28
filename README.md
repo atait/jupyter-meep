@@ -3,7 +3,7 @@ Mostly this is about using MEEP in jupyter notebooks, but there is other various
 
 ## Features
 ### Liveplot in notebooks
-This is important because you get real time feedback on how the simulation is going. Lumerical can't do that. To use it, wrap `liveplot` with a function that defines the field polarization. For example,
+This is important because you get real time feedback on how the simulation is going. I don't think Lumerical can do that. To use it, wrap `liveplot` with a function that defines the field polarization. For example,
 ```
 def livefield(sim):
     liveplot(sim, mp.Ez)
