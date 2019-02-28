@@ -50,11 +50,9 @@ def gds_to_meep(filename):
     return device_to_meep(D)
 
 
-# Device.to_meep = to_meep  # Add this method to Device class
-
-
 def give_loopmirror(gap=.5):
-    # gives it as a phidl Device as well as port, bounding box, and source things used by MEEP
+    # just an example of augmenting a normal phidl device (loop_mirror_terminator)
+    # giving it as a phidl Device as well as port, bounding box, and source things used by MEEP
     D = Device('loopmirror')
 
     cell = D << pg.rectangle([31, 15], layer=lys['FLOORPLAN'])

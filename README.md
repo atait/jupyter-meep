@@ -1,5 +1,5 @@
-# atait, some things to make MEEP nicer
-Mostly, this is about using MEEP in jupyter notebooks.
+# Jupyter MEEP
+Mostly this is about using MEEP in jupyter notebooks, but there is other various stuff.
 
 ## Features
 ### Liveplot in notebooks
