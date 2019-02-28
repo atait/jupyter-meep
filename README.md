@@ -1,4 +1,26 @@
-## My notes on installation
+# atait, some things to make MEEP nicer
+Mostly, this is about using MEEP in jupyter notebooks.
+
+## Liveplot in notebooks
+This is important because you get real time feedback on how the simulation is going. Lumerical can't do that.
+
+## Importing PHIDL Devices and gds files
+
+## Converting simulations to gifs
+`to_gif`. You must have imagemagik installed. Usage:
+```
+shutil.rmtree('outputs', ignore_errors=True)
+sim.use_output_directory('outputs')
+sim.run(
+        mp.at_beginning(livefield),    # Optional, if you want to see live plots
+        mp.at_every(5, livefield),     # Optional, if you want to see live plots
+        mp.at_every(1, mp.output_png(mp.Ez, "-Zc dkbluered")),         # Need this line to export the pngs
+        mp.to_appended('ez', mp.at_every(0.6, mp.output_efield_z)),    # Need this line to export the pngs
+        until=until)
+to_gif('outputs', 'ez')
+```
+
+## Notes on installing MEEP and MPB
 The ones [here](http://localhost:8000/Installation/) are not complete for Mac OSX. Some of the brew targets have been renamed
 
 ```bash

@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import subprocess
 import shutil
+import os
 from IPython import display
 import meep as mp
 from meep import mpb, materials
@@ -48,6 +49,7 @@ def show_geometry(sim_or_solver, **mpb_kwargs):
     plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
     return eps_data
 
+
 def show_mode(solver):
     pass
 
@@ -78,3 +80,15 @@ def liveplot(sim, component=mp.Ez):
     display.display(plt.gcf())
     display.clear_output(wait=True)
 
+
+def to_gif(output_dir, field_type='ez'):
+    # Converts pngs from your simulation into a nice gif
+    # You must have imagemagik in order to use convert
+    gif_name = field_type + '.gif'
+    simdata_glob = os.path.join(output_dir, field_type + '-*.png')
+    subprocess.check_call(['convert', simdata_glob, gif_name])
+    try:
+        subprocess.check_call(['open', '-a', 'Safari', gif_name])  # open it if you have Safari
+    except:
+        pass
+    return gif_name
