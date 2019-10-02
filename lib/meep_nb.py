@@ -30,10 +30,28 @@ class objview(object):
 
 
 def show_geometry(sim_or_solver, **mpb_kwargs):
+    if isinstance(sim_or_solver, mpb.ModeSolver):
+        # hope it works
+        return show_geometry_2d(sim_or_solver, **mpb_kwargs)
+    if not isinstance(sim_or_solver, mp.Simulation):
+        raise TypeError('{} not supported'.format(type(sim_or_solver)))
+    if sim_or_solver.dimensions == 1 or sim_or_solver.cell_size.y == 0 and sim_or_solver.cell_size.z == 0:
+        return show_geometry_1d(sim_or_solver)
+
+
+def show_geometry_1d(sim):
+    # raise NotImplementedError('1D Not supported yet')
+    sim.run(until=0.1)
+    eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
+    plt.figure(dpi=100)
+    plt.plot(eps_data)
+    return eps_data
+
+
+def show_geometry_2d(sim_or_solver, **mpb_kwargs):
     if isinstance(sim_or_solver, mp.Simulation):
         sim = sim_or_solver
         sim.run(until=.0)
-        # import pdb; pdb.set_trace()
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
         if len(eps_data.shape) == 3:
             eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
