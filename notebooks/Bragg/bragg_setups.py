@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append(os.path.join(os.dirname(__file__), '../../lib'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../lib'))
 from meep_nb import objview, silicon, oxide, liveplot
 import meep as mp
 import time
@@ -7,12 +7,12 @@ import time
 # geo is the parameters, while geometry is the MEEP geometry list
 default_geo = objview(
                         sm_width = 0.35,  # um
-                        pitch = .21,
+                        pitch = .207,
                         duty = .5,
-                        dw = .25,
-                        n_periods = 50,
+                        dw = .35,
+                        n_periods = 100,
                         buffer = 4,  # um
-                        cavity = 1.25,  # ratio of pitch, such as 0.25
+                        cavity = .5,  # ratio of pitch, such as 0.25
                         thickness = 0.,  # change to 0 for 2D
                        )
 
@@ -51,8 +51,8 @@ def kwargs_to_geo(geo=None, **kwargs):
     return this_geo
 
 
-fcen = 1 / 1.22
-df = fcen / 5
+fcen = 1 / 1.218
+df = fcen / 10
 nfreq = 1001
 def bragg_source(geo=None, **kwargs):
     geo = kwargs_to_geo(geo, **kwargs)

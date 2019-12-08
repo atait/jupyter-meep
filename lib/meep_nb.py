@@ -60,9 +60,10 @@ def show_geometry_2d(sim_or_solver, **mpb_kwargs):
         ms = sim_or_solver
         if not any(p in mpb_kwargs.keys() for p in ['periods', 'x', 'y', 'z']):
             mpb_kwargs['periods'] = 3
-        md = mpb.MPBData(rectify=True, resolution=32, **mpb_kwargs)
+        md = mpb.MPBData(rectify=True, resolution=ms.resolution[1], **mpb_kwargs)
         eps = ms.get_epsilon()
-        eps_data = md.convert(eps)  # make aspect ratios right
+        # eps_data = md.convert(eps)  # make aspect ratios right
+        eps_data = eps
     plt.figure(dpi=100)
     plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
     return eps_data

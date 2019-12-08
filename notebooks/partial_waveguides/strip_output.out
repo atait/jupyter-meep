@@ -1,0 +1,476 @@
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 4 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: .
+Initializing fields to random numbers...
+solve_kpoint (0.1,0,0):
+freqs:, k index, k1, k2, k3, kmag/2pi, band 1, band 2, band 3, band 4
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 22 iterations.
+freqs:, 1, 0.1, 0, 0, 0.1, 0.0794, 0.0849785, 0.297712, 0.374749
+solve_kpoint (0.190476,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 14 iterations.
+freqs:, 2, 0.190476, 0, 0, 0.190476, 0.150177, 0.160359, 0.324056, 0.383355
+solve_kpoint (0.280952,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 11 iterations.
+freqs:, 3, 0.280952, 0, 0, 0.280952, 0.218967, 0.232847, 0.36305, 0.398127
+solve_kpoint (0.371429,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 10 iterations.
+freqs:, 4, 0.371429, 0, 0, 0.371429, 0.284719, 0.301195, 0.41093, 0.417186
+solve_kpoint (0.461905,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 12 iterations.
+freqs:, 5, 0.461905, 0, 0, 0.461905, 0.345712, 0.364874, 0.440212, 0.463523
+solve_kpoint (0.552381,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 14 iterations.
+freqs:, 6, 0.552381, 0, 0, 0.552381, 0.397924, 0.424197, 0.470493, 0.516737
+solve_kpoint (0.642857,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 15 iterations.
+freqs:, 7, 0.642857, 0, 0, 0.642857, 0.436081, 0.479495, 0.513467, 0.567834
+solve_kpoint (0.733333,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 17 iterations.
+freqs:, 8, 0.733333, 0, 0, 0.733333, 0.463145, 0.53021, 0.566641, 0.615684
+solve_kpoint (0.82381,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 18 iterations.
+freqs:, 9, 0.82381, 0, 0, 0.82381, 0.48561, 0.574807, 0.623948, 0.660903
+solve_kpoint (0.914286,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 20 iterations.
+freqs:, 10, 0.914286, 0, 0, 0.914286, 0.506511, 0.61212, 0.68255, 0.69825
+solve_kpoint (1.00476,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 20 iterations.
+freqs:, 11, 1.00476, 0, 0, 1.00476, 0.526951, 0.64287, 0.724998, 0.740459
+solve_kpoint (1.09524,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 23 iterations.
+freqs:, 12, 1.09524, 0, 0, 1.09524, 0.547361, 0.668968, 0.746635, 0.777378
+solve_kpoint (1.18571,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 13 iterations.
+freqs:, 13, 1.18571, 0, 0, 1.18571, 0.567923, 0.692136, 0.76571, 0.799053
+solve_kpoint (1.27619,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 11 iterations.
+freqs:, 14, 1.27619, 0, 0, 1.27619, 0.588714, 0.713527, 0.783529, 0.818974
+solve_kpoint (1.36667,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 10 iterations.
+freqs:, 15, 1.36667, 0, 0, 1.36667, 0.609762, 0.733861, 0.800782, 0.838096
+solve_kpoint (1.45714,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 10 iterations.
+freqs:, 16, 1.45714, 0, 0, 1.45714, 0.63107, 0.753583, 0.817845, 0.856762
+solve_kpoint (1.54762,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 9 iterations.
+freqs:, 17, 1.54762, 0, 0, 1.54762, 0.652631, 0.772977, 0.834935, 0.875167
+solve_kpoint (1.6381,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 9 iterations.
+freqs:, 18, 1.6381, 0, 0, 1.6381, 0.674432, 0.792225, 0.852175, 0.893439
+solve_kpoint (1.72857,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 9 iterations.
+freqs:, 19, 1.72857, 0, 0, 1.72857, 0.696456, 0.81145, 0.869637, 0.911668
+solve_kpoint (1.81905,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 9 iterations.
+freqs:, 20, 1.81905, 0, 0, 1.81905, 0.718688, 0.830733, 0.887364, 0.929921
+solve_kpoint (1.90952,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 9 iterations.
+freqs:, 21, 1.90952, 0, 0, 1.90952, 0.741112, 0.850125, 0.905376, 0.948248
+solve_kpoint (2,0,0):
+Solving for bands 1 to 4...
+Finished solving for bands 1 to 4 after 8 iterations.
+freqs:, 22, 2, 0, 0, 2, 0.763714, 0.869664, 0.923682, 0.966684
+Initializing fields to random numbers...
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (2.22581,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 14 iterations.
+yoddfreqs:, 1, 2.22581, 0, 0, 2.22581, 0.820813
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (0.0645161,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 9 iterations.
+yoddfreqs:, 1, 0.0645161, 0, 0, 0.0645161, 0.0513059
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (2.58065,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 15 iterations.
+yoddfreqs:, 1, 2.58065, 0, 0, 2.58065, 0.912194
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (1.53658,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 13 iterations.
+yoddfreqs:, 1, 1.53658, 0, 0, 1.53658, 0.649988
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (1.51641,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 13 iterations.
+yoddfreqs:, 1, 1.51641, 0, 0, 1.51641, 0.645167
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (1.51639,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 13 iterations.
+yoddfreqs:, 1, 1.51639, 0, 0, 1.51639, 0.645161
+Working in 3 dimensions.
+Grid size is 1 x 128 x 128.
+Solving for 1 bands at a time.
+Creating Maxwell data...
+Mesh size is 3.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 2, 0)
+     (0, 0, 2)
+Cell volume = 4
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.5, -0)
+     (0, -0, 0.5)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1e+20,0.5,0.22)
+          axes (1,0,0), (0,1,0), (0,0,1)
+     block, center = (0,0,0.555)
+          size (1e+20,1e+20,0.89)
+          axes (1,0,0), (0,1,0), (0,0,1)
+Geometric object tree has depth 2 and 24 object nodes (vs. 2 actual objects)
+Initializing epsilon function...
+Allocating fields...
+Solving for band polarization: yodd.
+Initializing fields to random numbers...
+solve_kpoint (1.51639,0,0):
+yoddfreqs:, k index, k1, k2, k3, kmag/2pi, yodd band 1
+Solving for bands 1 to 1...
+Finished solving for bands 1 to 1 after 14 iterations.
+yoddfreqs:, 1, 1.51639, 0, 0, 1.51639, 0.645161
+Initializing eigensolver data
+Computing 4 bands with 1e-07 tolerance
+22 k-points
+  Vector3<0.1, 0.0, 0.0>
+  Vector3<0.19047619047619047, 0.0, 0.0>
+  Vector3<0.28095238095238095, 0.0, 0.0>
+  Vector3<0.37142857142857144, 0.0, 0.0>
+  Vector3<0.46190476190476193, 0.0, 0.0>
+  Vector3<0.5523809523809524, 0.0, 0.0>
+  Vector3<0.6428571428571428, 0.0, 0.0>
+  Vector3<0.7333333333333333, 0.0, 0.0>
+  Vector3<0.8238095238095238, 0.0, 0.0>
+  Vector3<0.9142857142857143, 0.0, 0.0>
+  Vector3<1.0047619047619047, 0.0, 0.0>
+  Vector3<1.0952380952380953, 0.0, 0.0>
+  Vector3<1.1857142857142857, 0.0, 0.0>
+  Vector3<1.2761904761904763, 0.0, 0.0>
+  Vector3<1.3666666666666667, 0.0, 0.0>
+  Vector3<1.4571428571428573, 0.0, 0.0>
+  Vector3<1.5476190476190477, 0.0, 0.0>
+  Vector3<1.638095238095238, 0.0, 0.0>
+  Vector3<1.7285714285714286, 0.0, 0.0>
+  Vector3<1.819047619047619, 0.0, 0.0>
+  Vector3<1.9095238095238096, 0.0, 0.0>
+  Vector3<2.0, 0.0, 0.0>
+elapsed time for initialization: 0.014748811721801758
+elapsed time for k point: 0.4675769805908203
+yparity:, 1, -0.9999998470648946, 0.9999999906182079, 1.0000038326161356, -1.0006657756160722
+elapsed time for k point: 0.27729320526123047
+yparity:, 2, -1.0000000068288568, 0.9999999861924255, 1.0000005434856138, -0.9999949047558084
+elapsed time for k point: 0.22599291801452637
+yparity:, 3, -1.0000000056752727, 0.9999999668000819, 1.0000011742609118, -0.9999991376228305
+elapsed time for k point: 0.20174431800842285
+yparity:, 4, -1.0000000733719565, 0.9999999597640857, 1.0000090896388887, -0.9999913653193648
+elapsed time for k point: 0.242628812789917
+yparity:, 5, -1.0000001676422625, 0.9999998775611635, -1.0000028432766719, 0.9999972766495391
+elapsed time for k point: 0.36389684677124023
+yparity:, 6, -1.0000003814855967, 0.999999946457069, -1.0000012735039299, 0.9999994730835089
+elapsed time for k point: 0.3334989547729492
+yparity:, 7, -1.0000002504074292, 0.9999997208584464, -1.0000000522774055, 0.9999999325745491
+elapsed time for k point: 0.3344419002532959
+yparity:, 8, -1.000001114757851, 0.999999889042353, -1.0000002114506128, 1.00000013731798
+elapsed time for k point: 0.34918713569641113
+yparity:, 9, -0.9999989601481641, 0.9999995460076797, -0.9999999042099729, 0.9999975774683112
+elapsed time for k point: 0.39105701446533203
+yparity:, 10, -1.0000019585765505, 1.0000002822643907, -0.9999995107246579, 0.9999974703717766
+elapsed time for k point: 0.43644094467163086
+yparity:, 11, -1.0000011312804378, 0.9999996380295361, 0.9999977561738447, -1.0000017902364524
+elapsed time for k point: 0.5683498382568359
+yparity:, 12, -1.0000008674050807, 0.9999989534564059, 0.9999996836337922, -1.0000029357797322
+elapsed time for k point: 0.28359007835388184
+yparity:, 13, -1.0000006989058186, 0.9999988650195006, 0.9999982649198951, -1.000002824750034
+elapsed time for k point: 0.2365260124206543
+yparity:, 14, -1.000000318112605, 0.9999989092203998, 0.9999983996337469, -1.000003041723288
+elapsed time for k point: 0.20626211166381836
+yparity:, 15, -1.0000005705459425, 0.9999989453637993, 0.9999992399557899, -1.0000028611481426
+elapsed time for k point: 0.20407509803771973
+yparity:, 16, -1.000000391119815, 0.9999989017098283, 0.9999997933015469, -1.0000028940624826
+elapsed time for k point: 0.1808462142944336
+yparity:, 17, -0.9999999165821002, 0.9999986848985539, 1.0000004146549755, -1.0000030456750368
+elapsed time for k point: 0.18155765533447266
+yparity:, 18, -0.9999997722937443, 0.9999987276005302, 1.000001027957312, -1.0000030756064946
+elapsed time for k point: 0.18553376197814941
+yparity:, 19, -0.9999995915889929, 0.9999987664002931, 1.0000016483651155, -1.0000030977644199
+elapsed time for k point: 0.18243122100830078
+yparity:, 20, -0.9999994016531312, 0.9999988105109437, 1.0000022986015367, -1.0000031053300371
+elapsed time for k point: 0.18269729614257812
+yparity:, 21, -0.9999991921916405, 0.9999988575797001, 1.0000029804423074, -1.0000030982450216
+elapsed time for k point: 0.16425395011901855
+yparity:, 22, -0.9999993322464049, 0.9999990479730332, 1.0000034781341813, -1.0000029067227594
+Band 1 range: 0.07940004948647074 at Vector3<0.1, 0.0, 0.0> to 0.7637143729702256 at Vector3<2.0, 0.0, 0.0>
+Band 2 range: 0.08497853615823613 at Vector3<0.1, 0.0, 0.0> to 0.8696642440719758 at Vector3<2.0, 0.0, 0.0>
+Band 3 range: 0.29771245806909846 at Vector3<0.1, 0.0, 0.0> to 0.9236821548856585 at Vector3<2.0, 0.0, 0.0>
+Band 4 range: 0.37474880788087733 at Vector3<0.1, 0.0, 0.0> to 0.9666841850928833 at Vector3<2.0, 0.0, 0.0>
+total elapsed time for run: 6.219292163848877
+done
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<2.2258064516129035, 0.0, 0.0>
+elapsed time for initialization: 0.013235092163085938
+elapsed time for k point: 0.07002997398376465
+total elapsed time for run: 0.08331918716430664
+done
+find-k 1 at 2.2258064516129035: 0.17565213310886318
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<0.06451612903225806, 0.0, 0.0>
+elapsed time for initialization: 0.01287698745727539
+elapsed time for k point: 0.047170162200927734
+total elapsed time for run: 0.06009531021118164
+done
+find-k 1 at 0.06451612903225806: -0.5938554271648392
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<2.5806451612903225, 0.0, 0.0>
+elapsed time for initialization: 0.012468814849853516
+elapsed time for k point: 0.07496023178100586
+total elapsed time for run: 0.08747601509094238
+done
+find-k 1 at 2.5806451612903225: 0.26703257911373224
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<1.5365834495210828, 0.0, 0.0>
+elapsed time for initialization: 0.01283717155456543
+elapsed time for k point: 0.06528997421264648
+total elapsed time for run: 0.07817602157592773
+done
+find-k 1 at 1.5365834495210828: 0.00482712064323465
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<1.516413915127918, 0.0, 0.0>
+elapsed time for initialization: 0.012540817260742188
+elapsed time for k point: 0.0650780200958252
+total elapsed time for run: 0.0776669979095459
+done
+find-k 1 at 1.516413915127918: 5.953687421733633e-06
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<1.5163889765089966, 0.0, 0.0>
+elapsed time for initialization: 0.012434244155883789
+elapsed time for k point: 0.06484484672546387
+total elapsed time for run: 0.07732677459716797
+done
+find-k 1 at 1.5163889765089966: 1.5907909434176304e-09
+Initializing eigensolver data
+Computing 1 bands with 1e-07 tolerance
+1 k-points
+  Vector3<1.5163889698454716, 0.0, 0.0>
+elapsed time for initialization: 0.012900114059448242
+elapsed time for k point: 0.07012605667114258
+Outputting fields to strip_wvg-flux.v.k01.b01.x.yodd.h5...
+yoddvelocity:, 1, Vector3<0.23872960747866256, -5.168527738601406e-08, 7.18435749934297e-06>
+total elapsed time for run: 0.32259297370910645
+done
+yoddkvals:, 0.6451612903225806, 1, 1, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.5163889698454716
+
+Elapsed run time = 7.0633 s
