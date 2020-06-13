@@ -6,6 +6,7 @@ import subprocess
 import shutil
 import os
 from IPython import display
+from IPython.utils.capture import capture_output
 import meep as mp
 from meep import mpb, materials
 
@@ -41,7 +42,8 @@ def show_geometry(sim_or_solver, **mpb_kwargs):
 
 def show_geometry_1d(sim):
     # raise NotImplementedError('1D Not supported yet')
-    sim.run(until=0.1)
+    with capture_output():
+        sim.run(until=0.1)
     eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
     plt.figure(dpi=100)
     plt.plot(eps_data)
@@ -51,7 +53,9 @@ def show_geometry_1d(sim):
 def show_geometry_2d(sim_or_solver, **mpb_kwargs):
     if isinstance(sim_or_solver, mp.Simulation):
         sim = sim_or_solver
-        sim.run(until=.0)
+        if not sim._is_initialized:
+            sim.init_sim()
+        # sim.run(until=.0)
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
         if len(eps_data.shape) == 3:
             eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
@@ -81,6 +85,9 @@ def liveplot(sim, component=mp.Ez):
     # component=mp.Ey
     if sim.meep_time() == 0.:
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
+        if eps_data.ndim < 2:
+            raise ValueError('Cannot use liveplot with less than 2 dimensions')
+        # slice it down the middle if 3D
         if len(eps_data.shape) == 3:
             eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
         dielectric_artist = plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
@@ -98,6 +105,33 @@ def liveplot(sim, component=mp.Ez):
     plt.title(f't = {sim.meep_time()}')
     display.display(plt.gcf())
     display.clear_output(wait=True)
+
+_lines_artist = None
+def liveplot_1D(sim, component=mp.Ey):
+    global _lines_artist
+    xspan = sim.cell_size.x/2 * np.linspace(-1, 1, int(sim.cell_size.x * sim.resolution))
+    if sim.meep_time() == 0.:
+        eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
+        # if eps_data.ndim > 1:
+        #     eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
+        fi = plt.gcf()
+        ax = plt.gca()
+        # todo dielectric artist
+        _lines_artist = []
+        liey, = ax.plot(xspan, np.zeros_like(xspan), 'r', label='Ey')
+        # liez, = ax.plot([], [], 'b', label='Ez')
+        _lines_artist.append(liey)
+        # _lines_artist.append(liez)
+        return
+    # now do the field
+    ey_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Ey)
+    ez_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Ez)
+    _lines_artist[0].set_data(xspan, ey_data)
+    # _lines_artist[1].set_data(xspan, ez_data)
+    plt.title(f't = {sim.meep_time()}')
+    plt.legend()
+    display.clear_output(wait=True)
+    display.display(plt.gcf())
 
 
 def to_gif(output_dir, field_type='ez'):

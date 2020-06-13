@@ -69,7 +69,7 @@ Then you have to get libctl and harminv. Download zips of them from github. Next
 ./configure && make && make install
 ```
 
-*however*, you must first run this command
+*however, if autogen.sh is present in the directory*, you must first run this command
 
 ```bash
 source autogen.sh
@@ -77,7 +77,7 @@ source autogen.sh
 
 Now meep is a little different. You have to do
 ```bash
-./autogen.sh --enable-maintainer-mode --enable-shared --prefix=/usr/local
+./configure --enable-maintainer-mode --enable-shared --prefix=/usr/local
 make && make install
 ```
 I don't know why. Ask [this guy](https://darkalexwang.github.io/2016/10/06/python-meep-install-mac/).
@@ -86,5 +86,9 @@ I don't know why. Ask [this guy](https://darkalexwang.github.io/2016/10/06/pytho
 Ok it seems there are actually bugs in the code where maxwell_eps.c is trying to get `NQUAD` from sphere-quad.h, but that h-file is empty. Strangely it is in the gitignore
 
 Alright! The autogen options also solved the problem with MPB.
+```bash
+./configure --enable-maintainer-mode --enable-shared --prefix=/usr/local
+make && make install
+```
 
 For python version, MPB goes within MEEP. You must reconfigure and re-install MEEP after installing MPB
