@@ -3,8 +3,10 @@ import meep as mp
 import numpy as np
 import matplotlib.pyplot as plt
 import subprocess
+import inspect
 import shutil
 import os
+from functools import wraps
 from IPython import display
 from IPython.utils.capture import capture_output
 import meep as mp
@@ -28,6 +30,75 @@ class objview(object):
     def copy(self):
         new_obj = objview(**self.__dict__)
         return new_obj
+
+# decorator
+def display_nb(func):
+    # MEEP will introspect this signature for an argument, so we have to outrospect the wrapper
+    spec = inspect.getfullargspec(func).args
+    npositional = len(spec)
+    if spec[0] == 'self':
+        npositional -= 1
+    @wraps(func)
+    def wrap0arg(*args, **kwargs):
+        retval = func(*args, **kwargs)
+        display.clear_output(wait=True)
+        display.display(plt.gcf())
+        return retval
+    @wraps(func)
+    def wrap1arg(a, *args, **kwargs):
+        retval = func(a, *args, **kwargs)
+        display.clear_output(wait=True)
+        display.display(plt.gcf())
+        return retval
+    @wraps(func)
+    def wrap2arg(a, b, *args, **kwargs):
+        retval = func(a, b, *args, **kwargs)
+        display.clear_output(wait=True)
+        display.display(plt.gcf())
+        return retval
+    @wraps(func)
+    def wrap3arg(a, b, c, *args, **kwargs):
+        retval = func(a, b, c, *args, **kwargs)
+        display.clear_output(wait=True)
+        display.display(plt.gcf())
+        return retval
+
+    if npositional == 0:
+        return wrap0arg
+    elif npositional == 1:
+        return wrap1arg
+    elif npositional == 2:
+        return wrap2arg
+    elif npositional == 3:
+        return wrap3arg
+    else:
+        print(inspect.getfullargspec(func).args)
+        raise ValueError('Too many arguments')
+
+
+class Animate2D(mp.Animate2D):
+    ''' Adjust the behavior of realtime and call signatures
+
+        This is very, very slow to plot, so beware in the inner loop.
+        It is still ok for coarse preview, and especially good for outputting videos
+        Take note of to_mp4 and to_gif
+
+        Note that sim can be None in the initializer; however,
+        this means you can't save video or gifs
+    '''
+    def __init__(self,sim,fields,f=None,realtime=False,normalize=False,
+                 plot_modifiers=None,**customization_args):
+        super().__init__(sim,fields,f,False,normalize,  # their realtime to False
+                         plot_modifiers,**customization_args)
+        self._notebook_realtime = realtime
+
+    def __call__(self,sim,todo='step'):
+        super().__call__(sim, todo)
+        if self._notebook_realtime:
+            if self.f is None:
+                self.f = plt.gcf()
+            display.clear_output(wait=True)
+            display.display(self.f)
 
 
 def show_geometry(sim_or_solver, **mpb_kwargs):
@@ -78,60 +149,61 @@ def show_mode(solver):
 
 
 _field_artist = None
-def liveplot(sim, component=mp.Ez):
+# @display_nb
+def liveplot(sim, component=mp.Ez, vmax=0.1):
     ''' You must put ``mp.at_beginning(liveplot)`` in your arguments to run!
         Make sure to turn the progress_interval up before using this
     '''
-    # component=mp.Ey
-    if sim.meep_time() == 0.:
-        eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
-        if eps_data.ndim < 2:
-            raise ValueError('Cannot use liveplot with less than 2 dimensions')
-        # slice it down the middle if 3D
-        if len(eps_data.shape) == 3:
-            eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
-        dielectric_artist = plt.imshow(eps_data.transpose()[::-1], interpolation='spline36', cmap='binary')
-    # now do the field
-    field_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=component)
-    if len(field_data.shape) == 3:
-            field_data = field_data[:, :, int(field_data.shape[2] / 2)]
     global _field_artist
+    field_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=component)
     if sim.meep_time() == 0.:
+        ax = sim.plot2D()
+        extent = ax.get_images()[0].get_extent()
         _field_artist = plt.imshow(field_data.transpose()[::-1], interpolation='spline36', cmap='RdBu',
-                                   alpha=0.9, vmin=-.1, vmax=.1)
-        return
+                                   alpha=0.8, vmin=-vmax, vmax=vmax, extent=extent)
     else:
         _field_artist.set_data(field_data.transpose())
-    plt.title(f't = {sim.meep_time()}')
-    display.display(plt.gcf())
-    display.clear_output(wait=True)
 
-_lines_artist = None
+    plt.title(f't = {sim.meep_time()}')
+    display.clear_output(wait=True)
+    display.display(plt.gcf())
+
+
+_field_axis = None
+def liveplot_slow(sim, component=mp.Ez):
+    ''' this uses the builtin functions in MEEP.
+        It gets very slow after showing 5 frames
+        Example: 59s vs. 12s for 40 frames
+    '''
+    global _field_axis, _field_artist
+    if sim.meep_time() == 0.:
+        _field_axis = sim.plot2D(fields=component)
+    else:
+        mp.plot_fields(sim, ax=_field_axis, fields=component)
+    plt.title(f't = {sim.meep_time()}')
+    display.clear_output(wait=True)
+    display.display(plt.gcf())
+
+
+_eline = None
+@display_nb
 def liveplot_1D(sim, component=mp.Ey):
-    global _lines_artist
+    global _eline
     xspan = sim.cell_size.x/2 * np.linspace(-1, 1, int(sim.cell_size.x * sim.resolution))
+    comp_name = 'Ey' if component == mp.Ey else 'Ez' if component == mp.Ez else 'Ex'
     if sim.meep_time() == 0.:
         eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
         # if eps_data.ndim > 1:
         #     eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
-        fi = plt.gcf()
-        ax = plt.gca()
         # todo dielectric artist
-        _lines_artist = []
-        liey, = ax.plot(xspan, np.zeros_like(xspan), 'r', label='Ey')
-        # liez, = ax.plot([], [], 'b', label='Ez')
-        _lines_artist.append(liey)
-        # _lines_artist.append(liez)
+
+        _eline, = plt.gca().plot(xspan, np.zeros_like(xspan), 'r', label=comp_name)
         return
     # now do the field
-    ey_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Ey)
-    ez_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Ez)
-    _lines_artist[0].set_data(xspan, ey_data)
-    # _lines_artist[1].set_data(xspan, ez_data)
+    e_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=component)
+    _eline.set_data(xspan, e_data)
     plt.title(f't = {sim.meep_time()}')
     plt.legend()
-    display.clear_output(wait=True)
-    display.display(plt.gcf())
 
 
 def to_gif(output_dir, field_type='ez'):
