@@ -101,26 +101,31 @@ def liveplot(sim, component=mp.Ez, vmax=0.1):
     display.display(plt.gcf())
 
 
+def x_field_data(sim, component=mp.Ey):
+    xspan = sim.cell_size.x/2 * np.linspace(-1, 1, int(sim.cell_size.x * sim.resolution))
+    e_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=component)
+    return xspan, e_data
+
+
 _eline = None
 def liveplot_1D(sim, component=mp.Ey):
     global _eline
-    xspan = sim.cell_size.x/2 * np.linspace(-1, 1, int(sim.cell_size.x * sim.resolution))
-    comp_name = 'Ey' if component == mp.Ey else 'Ez' if component == mp.Ez else 'Ex'
     if sim.meep_time() == 0.:
-        eps_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=mp.Dielectric)
+        xspan, eps_data = x_field_data(sim, component=mp.Dielectric)
         # if eps_data.ndim > 1:
         #     eps_data = eps_data[:, :, int(eps_data.shape[2] / 2)]
         # todo dielectric artist
 
+        comp_name = 'Ey' if component == mp.Ey else 'Ez' if component == mp.Ez else 'Ex'
         _eline, = plt.gca().plot(xspan, np.zeros_like(xspan), 'r', label=comp_name)
-        return
-    # now do the field
-    e_data = sim.get_array(center=mp.Vector3(), size=sim.cell_size, component=component)
-    _eline.set_data(xspan, e_data)
-    plt.title(f't = {sim.meep_time()}')
-    plt.legend()
-    display.clear_output(wait=True)
-    display.display(plt.gcf())
+    else:
+        # now do the field
+        xspan, e_data = x_field_data(sim, component=component)
+        _eline.set_data(xspan, e_data)
+        plt.title(f't = {sim.meep_time()}')
+        plt.legend()
+        display.clear_output(wait=True)
+        display.display(plt.gcf())
 
 
 def to_gif(output_dir, field_type='ez'):
