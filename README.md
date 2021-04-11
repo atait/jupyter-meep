@@ -1,5 +1,5 @@
 # Jupyter MEEP
-Mostly this is about using MEEP in jupyter notebooks, but there is other various stuff.
+Notebook-based graphics and I/O for MEEP, with extensive examples of specific devices.
 
 ## Features
 ### Liveplot in notebooks
@@ -56,6 +56,10 @@ And then in your new cell,
 spectra.simplePlot()
 ```
 
+### Sweep multiprocessing
+MEEP has some HPC (MPI, GPU) capabilities for large simulations. These are great but do not really provide a benefit for embarrassingly parallel parameter sweeps. The concept is simple: create one process per MEEP simulation, scatter parameters, let the OS schedule processes on the multi-core machine, gather results. Jupyter-MEEP provides a simple interface for orchestrating this strategy.
+
+
 ## Notes on installing MEEP and MPB on OSX
 The ones [here](http://localhost:8000/Installation/) are not complete for Mac OSX. Some of the brew targets have been renamed
 
@@ -92,3 +96,6 @@ make && make install
 ```
 
 For python version, MPB goes within MEEP. You must reconfigure and re-install MEEP after installing MPB
+
+### "Installing" jupyter-meep
+This is not a python package. Each notebook must add the `./lib` directory to system path in order to import the modules.
