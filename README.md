@@ -30,6 +30,11 @@ sim.run(
 to_gif('outputs', 'ez')
 ```
 
+Then go ahead and embed the gif anywhere
+
+![alt](mmi-example.gif)
+
+
 ### Importing PHIDL Devices and gds files
 `device_to_meep` and `gds_to_meep`. You must have phidl installed.
 
