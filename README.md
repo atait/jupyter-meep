@@ -1,5 +1,7 @@
 # Jupyter MEEP
-Notebook-based graphics and I/O for MEEP, with extensive examples of specific devices.
+Notebook-based graphics and I/O for MEEP, with examples of specific devices.
+
+Disclaimer: This is not a formally maintained repo, more like a lab notebook. Most of them are illustrations/tutorials of workflows I found useful. Notebooks on the main branch are not guaranteed to work, even if it did the day before. Elements that are reusable such as plotting tools have been extracted into the library modules, which are kind of stable (not guaranteed).
 
 ## Features
 ### Liveplot in notebooks
@@ -36,10 +38,8 @@ Then go ahead and embed the gif anywhere
 
 
 ### Importing PHIDL Devices and gds files
-`device_to_meep` and `gds_to_meep`. You must have phidl installed.
+`device_to_meep` and `gds_to_meep`. You must have phidl installed. See the notebook.
 
-#### Example: loop mirror
-This is in a notebook. You must have nc_library available, so you have to ask Adam for access to nc-phidl. Then, add nc-phidl to your PYTHONPATH.
 
 ### Save and load formulas
 This is done with `lightlab`. You sometimes don't want to resimulate the whole thing if you just want to mess with the plots. If the jupyter kernel reboots, then you will lose all of your simulation data needed to come back to the plot.
@@ -62,7 +62,7 @@ spectra.simplePlot()
 ```
 
 ### Sweep multiprocessing
-MEEP has some HPC (MPI, GPU) capabilities for large simulations. These are great but do not really provide a benefit for embarrassingly parallel parameter sweeps. The concept is simple: create one process per MEEP simulation, scatter parameters, let the OS schedule processes on the multi-core machine, gather results. Jupyter-MEEP provides a simple interface for orchestrating this strategy.
+MEEP has some HPC (MPI, GPU) capabilities for large simulations. These are great but do not really provide a benefit for embarrassingly parallel parameter sweeps. The concept: create one process per MEEP simulation, scatter parameters, let the OS schedule processes on the multi-core machine, gather results. Jupyter-MEEP provides a simple interface for orchestrating this strategy (EDIT: _will_ provide. This is planned but not done. Development efforts are sketched out in a notebook).
 
 
 ## Notes on installing MEEP and MPB on OSX
