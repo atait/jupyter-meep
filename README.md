@@ -89,7 +89,7 @@ Now meep is a little different. You have to do
 ./configure --enable-maintainer-mode --enable-shared --prefix=/usr/local
 make && make install
 ```
-I don't know why. Ask [this guy](https://darkalexwang.github.io/2016/10/06/python-meep-install-mac/).
+I don't know why. Ask [this person](https://darkalexwang.github.io/2016/10/06/python-meep-install-mac/).
 
 ### MPB
 Ok it seems there are actually bugs in the code where maxwell_eps.c is trying to get `NQUAD` from sphere-quad.h, but that h-file is empty. Strangely it is in the gitignore
@@ -103,4 +103,4 @@ make && make install
 For python version, MPB goes within MEEP. You must reconfigure and re-install MEEP after installing MPB
 
 ### "Installing" jupyter-meep
-This is not a python package. Each notebook must add the `./lib` directory to system path in order to import the modules.
+This is not a python package. Each notebook must add the `./jupyter-meep-libs` directory to system path in order to import the modules.
